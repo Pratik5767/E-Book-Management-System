@@ -19,28 +19,14 @@ public class DBConnect {
 		}
 	}
 
-	public static Connection getConnection() {
-		try {
+	public static Connection getConnection() throws SQLException, IOException {
+		FileInputStream fis = new FileInputStream(
+				"D:\\Pratik\\git\\EBookRepo\\EBookApp\\src\\main\\java\\properties\\application.properties");
+		Properties properties = new Properties();
+		properties.load(fis);
 
-			FileInputStream fis = new FileInputStream(
-					"D:\\Pratik\\git\\EBookRepo\\EBookApp\\src\\main\\java\\properties\\application.properties");
-			Properties properties = new Properties();
-			properties.load(fis);
-
-			connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("user"),
-					properties.getProperty("password"));
-
-			// connection = DriverManager.getConnection("jdbc:mysql:///ebook", "root",
-			// "Pratik@database");
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		if (connection == null)
-			return null;
+		connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("userName"),
+				properties.getProperty("password"));
 		return connection;
 	}
 
