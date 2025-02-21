@@ -1,0 +1,6 @@
+# Ignore application.properties
+application.properties
+# If it's in a specific folder
+D:/Pratik/git/EBookRepo/EBookApp/src/main/java/properties/application.properties
+/bin/
+/build/
