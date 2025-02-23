@@ -12,38 +12,32 @@ import com.Service.IUserService;
 import com.ServiceFactory.UserServiceFactory;
 import com.entity.User;
 
-@WebServlet("/register")
-public class RegisterationServlet extends HttpServlet {
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		// fetch
-		String name = request.getParameter("fname");
+
 		String email = request.getParameter("email");
-		String phoneNo = request.getParameter("phoneNo");
 		String password = request.getParameter("password");
-		
-		// set
-		User user = new User();
-		user.setName(name);
-		user.setEmail(email);
-		user.setPhoneNo(Long.parseLong(phoneNo));
-		user.setPassword(password);
-		
+
 		IUserService userService = UserServiceFactory.getUserService();
-		boolean status = userService.register(user);
+		User user = userService.login(email, password);
 		HttpSession session = null;
-		
-		if (status) {
+
+		if ("admin@gmail.com".equals(email) && "admin".equals(password)) {
 			session = request.getSession();
-			session.setAttribute("success", "Registration Successfull");
-			response.sendRedirect("register.jsp");
+			session.setAttribute("userObj", user);
+			response.sendRedirect("admin/home.jsp");
+		} else if (user != null) {
+			session = request.getSession();
+			session.setAttribute("userObj", user);
+			response.sendRedirect("home.jsp");
 		} else {
 			session = request.getSession();
-			session.setAttribute("failure", "Registration Failed");
-			response.sendRedirect("register.jsp");
+			session.setAttribute("failureMsg", "Invalid Email or Password");
+			response.sendRedirect("login.jsp");			
 		}
 	}
 }

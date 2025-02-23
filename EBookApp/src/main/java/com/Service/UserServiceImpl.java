@@ -7,12 +7,17 @@ import com.entity.User;
 public class UserServiceImpl implements IUserService {
 
 	private IUserDao userDao = null;
-	
+
 	@Override
 	public boolean register(User user) {
-		if (userDao == null)
-			userDao = UserDaoFactory.getUserDao();					
+		userDao = UserDaoFactory.getUserDao();
 		return userDao.register(user);
+	}
+
+	@Override
+	public User login(String email, String password) {
+		userDao = UserDaoFactory.getUserDao();
+		return userDao.login(email, password);
 	}
 
 }

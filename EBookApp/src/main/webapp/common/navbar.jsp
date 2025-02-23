@@ -2,8 +2,12 @@
 
 <div class="container-fluid p-3 bg-white">
 	<div class="row">
-		<div class="col-md-4 text-success">
-			<h3><i class="fa-solid fa-book"></i> E-Books</h3>
+		<div class="col-md-4">
+			<h3>
+				<a href="index.jsp" class="text-success" style="text-decoration: none;">
+					<i class="fa-solid fa-book"></i> E-Books
+				</a>
+			</h3>
 		</div>
 
 		<div class="col-md-6">
@@ -25,7 +29,7 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
-				<a class="nav-link" href="index.jsp">
+				<a class="nav-link" href="#">
 					<i class="fa-solid fa-house"></i> Home <span class="sr-only">(current)</span>
 				</a>
 			</li>
